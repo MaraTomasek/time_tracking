@@ -60,7 +60,7 @@ class TimeTrackingApplicationTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 		DocumentContext documentContext = JsonPath.parse(response.getBody());
-		JSONArray read = documentContext.read("$[*]");
+		JSONArray read = documentContext.read("$.content[*]");
 		assertEquals(1, read.size());
 	}
 
@@ -71,10 +71,10 @@ class TimeTrackingApplicationTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 		DocumentContext documentContext = JsonPath.parse(response.getBody());
-		JSONArray read = documentContext.read("$[*]");
+		JSONArray read = documentContext.read("$.content");
 		assertEquals(1, read.size());
 
-		Number LargestCheckIn = documentContext.read("$[0].checkInInMilliseconds");
+		Number LargestCheckIn = documentContext.read("$.content[0].checkInInMilliseconds");
 		assertEquals(largestTime, LargestCheckIn);
 	}
 
@@ -84,10 +84,10 @@ class TimeTrackingApplicationTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 		DocumentContext documentContext = JsonPath.parse(response.getBody());
-		JSONArray read = documentContext.read("$[*]");
+		JSONArray read = documentContext.read("$.content");
 		assertEquals(5, read.size());
 
-		Number LargestCheckIn = documentContext.read("$[0].checkInInMilliseconds");
+		Number LargestCheckIn = documentContext.read("$.content[0].checkInInMilliseconds");
 		assertEquals(largestTime, LargestCheckIn);
 	}
 
